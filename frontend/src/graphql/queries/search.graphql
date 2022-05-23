@@ -1,0 +1,20 @@
+query Search($term: String, $state: String, $district: String) {
+	search(term: $term, state: $state, district: $district) {
+		id
+		name
+		description
+		listedBy {
+			id
+			name
+			email
+		}
+		pricePerDay
+		pricePerWeek
+		pricePerMonth
+		street
+		district
+		state
+		photos
+		createdAt
+	}
+}

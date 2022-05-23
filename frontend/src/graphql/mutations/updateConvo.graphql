@@ -1,0 +1,3 @@
+mutation UpdateConvo($convoId: Int!, $userId: Int!) {
+	updateConvo(convoId: $convoId, userId: $userId)
+}

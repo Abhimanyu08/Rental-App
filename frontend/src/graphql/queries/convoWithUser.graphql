@@ -1,0 +1,13 @@
+query ConvoWithUser($convoId: Int!, $after: Int, $take: Int!) {
+	convoWithUser(convoId: $convoId, after: $after, take: $take) {
+		hasMore
+		messages {
+			id
+			fromId
+			convoId
+			toId
+			content
+			createdAt
+		}
+	}
+}

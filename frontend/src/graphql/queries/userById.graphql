@@ -1,0 +1,13 @@
+query User($userId: Int!) {
+	user(id: $userId) {
+		... on User {
+			id
+			name
+			avatar_url
+		}
+		... on Error {
+			type
+			message
+		}
+	}
+}

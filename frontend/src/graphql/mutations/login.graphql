@@ -1,0 +1,11 @@
+mutation LoginUser($email: String!) {
+	loginUser(email: $email) {
+		__typename
+		... on User {
+			...UserFragment
+		}
+		... on Error {
+			...ErrorFragment
+		}
+	}
+}

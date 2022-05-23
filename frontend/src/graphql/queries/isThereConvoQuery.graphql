@@ -1,0 +1,3 @@
+query IsThereConvo($userId: Int!, $friendId: Int!) {
+	isThereConvoWithFriend(userId: $userId, friendId: $friendId)
+}

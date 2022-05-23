@@ -1,0 +1,10 @@
+query ConvosByUser($userId: Int) {
+	convosByUser(user_id: $userId) {
+		id
+		friend {
+			id
+			name
+		}
+		all_seen_by_user
+	}
+}

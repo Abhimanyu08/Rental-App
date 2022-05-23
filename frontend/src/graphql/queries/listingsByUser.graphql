@@ -1,0 +1,18 @@
+query ListingsByUser($userId: Int!, $take: Int!, $after: Int) {
+	listingsByUser(user_id: $userId, take: $take, after: $after) {
+		items {
+			__typename
+			id
+			name
+			pricePerDay
+			pricePerWeek
+			pricePerMonth
+			street
+			district
+			state
+			photos
+			createdAt
+		}
+		hasMore
+	}
+}

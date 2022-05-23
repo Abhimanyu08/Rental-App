@@ -1,0 +1,20 @@
+query Listings($take: Int!, $after: Int) {
+	listings(take: $take, after: $after) {
+		items {
+			id
+			name
+			listedBy {
+				id
+				name
+			}
+			pricePerDay
+			pricePerWeek
+			pricePerMonth
+			street
+			district
+			state
+			photos
+		}
+		hasMore
+	}
+}

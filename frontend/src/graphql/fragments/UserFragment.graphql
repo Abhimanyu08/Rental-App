@@ -1,0 +1,7 @@
+fragment UserFragment on User {
+	__typename
+	id
+	name
+	email
+	avatar_url
+}

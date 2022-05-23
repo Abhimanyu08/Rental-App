@@ -1,0 +1,14 @@
+fragment ListingFragment on Listing {
+	__typename
+	id
+	name
+	description
+	pricePerDay
+	pricePerWeek
+	pricePerMonth
+	street
+	district
+	state
+	photos
+	createdAt
+}

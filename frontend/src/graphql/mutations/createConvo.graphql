@@ -1,0 +1,10 @@
+mutation CreateConvo($firstId: Int!, $secondId: Int!) {
+	createConvo(firstId: $firstId, secondId: $secondId) {
+		id
+		friend {
+			id
+			name
+		}
+		all_seen_by_user
+	}
+}

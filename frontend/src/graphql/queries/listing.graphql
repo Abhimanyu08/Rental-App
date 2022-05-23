@@ -1,0 +1,18 @@
+query Listing($listingId: Int!) {
+	listing(id: $listingId) {
+		id
+		name
+		description
+		listedBy {
+			id
+			name
+		}
+		pricePerDay
+		pricePerWeek
+		pricePerMonth
+		street
+		district
+		state
+		photos
+	}
+}

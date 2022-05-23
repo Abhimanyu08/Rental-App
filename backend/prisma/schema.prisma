@@ -1,0 +1,86 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Listing {
+  id                   Int                      @id @default(autoincrement())
+  createdAt            DateTime                 @default(now())
+  updatedAt            DateTime                 @updatedAt
+  name                 String
+  description          String
+  userId               Int
+  pricePerDay          Int
+  pricePerWeek         Int?
+  pricePerMonth        Int?
+  photos               String[]
+  searchable_index_col Unsupported("tsvector")?
+  district             String                   @default("")
+  state                String                   @default("")
+  street               String                   @default("")
+  available            Boolean                  @default(true)
+  listedBy             User                     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  reviews              Review[]
+
+  @@index([searchable_index_col])
+}
+
+model Review {
+  rating     Int
+  comment    String?
+  listingId  Int
+  reviewerId Int
+  listerId   Int
+  lister     User    @relation("received", fields: [listerId], references: [id])
+  listing    Listing @relation(fields: [listingId], references: [id])
+  reviewer   User    @relation("given", fields: [reviewerId], references: [id])
+
+  @@id([listingId, reviewerId])
+}
+
+model User {
+  id               Int       @id @default(autoincrement())
+  email            String    @unique
+  name             String
+  auth_method String?
+  createdAt        DateTime  @default(now())
+  avatar_url       String?
+  listings         Listing[]
+  sent             Message[] @relation("from")
+  received         Message[] @relation("to")
+  reviews_received Review[]  @relation("received")
+  reviews_given    Review[]  @relation("given")
+  convos_started  Convo[] @relation("started")
+  convos_welcomed Convo[] @relation("welcomed")
+}
+
+model Message {
+  id      Int    @id @default(autoincrement())
+  createdAt DateTime @default(now())
+  convoId Int 
+  convo Convo @relation(fields: [convoId], references: [id], onDelete: Cascade)
+  fromId  Int? 
+  toId    Int? 
+  content String
+  from    User?   @relation("from", fields: [fromId], references: [id], onDelete: SetNull)
+  to      User?   @relation("to", fields: [toId], references: [id], onDelete: SetNull)
+}
+
+model Convo {
+
+  id Int @id @default(autoincrement())
+  firstParticipantId Int?
+  secondParticiapantId Int? 
+  firstParticipant User? @relation("started", fields: [firstParticipantId], references: [id], onDelete: SetNull)
+  secondParticipant User? @relation("welcomed", fields: [secondParticiapantId], references: [id], onDelete: SetNull)
+  all_seen_by_first Boolean @default(true)
+  all_seen_by_second Boolean @default(true)
+  latest_message_time DateTime @default(now())
+  messages Message[]
+
+  @@unique([firstParticipantId, secondParticiapantId])
+}

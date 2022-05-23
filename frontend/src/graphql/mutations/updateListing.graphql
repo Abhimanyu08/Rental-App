@@ -1,0 +1,41 @@
+mutation UpdateListing(
+	$itemId: Int!
+	$name: String
+	$description: String
+	$pricePerDay: Int
+	$pricePerWeek: Int
+	$pricePerMonth: Int
+	$street: String
+	$district: String
+	$state: String
+	$photos: [String!]
+) {
+	updateListing(
+		itemId: $itemId
+		name: $name
+		description: $description
+		pricePerDay: $pricePerDay
+		pricePerWeek: $pricePerWeek
+		pricePerMonth: $pricePerMonth
+		street: $street
+		district: $district
+		state: $state
+		photos: $photos
+	) {
+		id
+		name
+		description
+		listedBy {
+			id
+			name
+			email
+		}
+		pricePerDay
+		pricePerWeek
+		pricePerMonth
+		street
+		district
+		state
+		photos
+	}
+}

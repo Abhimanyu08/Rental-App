@@ -1,0 +1,32 @@
+mutation CreateListing(
+	$name: String!
+	$description: String!
+	$userId: Int!
+	$street: String!
+	$district: String!
+	$state: String!
+	$photos: [String!]!
+	$pricePerDay: Int!
+	$pricePerWeek: Int
+	$pricePerMonth: Int
+) {
+	createListing(
+		name: $name
+		description: $description
+		userId: $userId
+		street: $street
+		district: $district
+		state: $state
+		photos: $photos
+		pricePerDay: $pricePerDay
+		pricePerWeek: $pricePerWeek
+		pricePerMonth: $pricePerMonth
+	) {
+		...ListingFragment
+		listedBy {
+			id
+			name
+			email
+		}
+	}
+}

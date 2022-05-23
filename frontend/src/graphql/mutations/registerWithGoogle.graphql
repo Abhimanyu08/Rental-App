@@ -1,0 +1,8 @@
+mutation RegisterWithGoogle($name: String!, $email: String!) {
+	registerWithGoogle(name: $name, email: $email) {
+		id
+		name
+		email
+		avatar_url
+	}
+}

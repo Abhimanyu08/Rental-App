@@ -1,0 +1,4 @@
+-- AlterTable
+ALTER TABLE "Listing" ALTER COLUMN "pricePerDay" DROP NOT NULL,
+ALTER COLUMN "pricePerWeek" DROP NOT NULL,
+ALTER COLUMN "pricePerMonth" DROP NOT NULL;

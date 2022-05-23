@@ -1,0 +1,11 @@
+mutation RegisterUser($name: String!, $email: String!) {
+	registerUser(name: $name, email: $email) {
+		__typename
+		... on User {
+			...UserFragment
+		}
+		... on Error {
+			...ErrorFragment
+		}
+	}
+}

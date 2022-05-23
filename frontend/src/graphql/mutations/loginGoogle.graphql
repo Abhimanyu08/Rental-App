@@ -1,0 +1,8 @@
+mutation LoginWithGoogle($name: String!, $email: String!) {
+	loginWithGoogle(name: $name, email: $email) {
+		__typename
+		id
+		name
+		email
+	}
+}

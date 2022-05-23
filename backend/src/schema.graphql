@@ -1,0 +1,115 @@
+union LoginResponse = User | Error
+scalar Date
+
+type ListingsResponse {
+	items: [Listing!]!
+	hasMore: Boolean!
+}
+
+type Query {
+	me: User!
+	user(id: Int!): LoginResponse!
+	listing(id: Int!): Listing!
+	listings(take: Int!, after: Int): ListingsResponse!
+	listingsByUser(user_id: Int!, take: Int!, after: Int): ListingsResponse!
+	search(term: String, state: String, district: String): [Listing!]!
+	convosByUser(user_id: Int): [Convo]! #user_id is undefined for the case when the convos are fetched for a logged out/unregistered user.
+	isThereConvoWithFriend(userId: Int!, friendId: Int!): Int
+	convoWithUser(convoId: Int!, after: Int, take: Int!): PaginatedMessages!
+}
+
+type PaginatedMessages {
+	hasMore: Boolean!
+	messages: [Message]!
+}
+
+type Message {
+	id: Int!
+	fromId: Int
+	toId: Int
+	content: String!
+	convoId: Int!
+	createdAt: Date!
+}
+
+type Convo {
+	id: Int!
+	friend: User
+	all_seen_by_user: Boolean!
+}
+
+type User {
+	id: Int!
+	name: String!
+	email: String
+	avatar_url: String
+	auth_method: String
+}
+
+type Error {
+	type: String!
+	message: String!
+}
+
+type Listing {
+	id: Int!
+	name: String!
+	description: String!
+	listedBy: User
+	pricePerDay: Int
+	pricePerWeek: Int
+	pricePerMonth: Int
+	street: String!
+	district: String!
+	state: String!
+	photos: [String!]!
+	createdAt: Date!
+	# reviews: [Review]!
+}
+
+type Mutation {
+	registerUser(name: String!, email: String!): LoginResponse!
+
+	registerWithGoogle(name: String!, email: String!): User!
+
+	loginUser(email: String!): LoginResponse!
+
+	loginWithGoogle(name: String!, email: String!): User!
+
+	logoutUser: Boolean!
+
+	deleteUser(id: Int!): Boolean!
+
+	updateUser(id: Int!, name: String, avatar_url: String): User
+
+	createListing(
+		name: String!
+		description: String!
+		userId: Int!
+		pricePerDay: Int!
+		pricePerWeek: Int
+		pricePerMonth: Int
+		street: String!
+		district: String!
+		state: String!
+		photos: [String!]!
+	): Listing!
+
+	updateListing(
+		itemId: Int!
+		name: String
+		description: String
+		pricePerDay: Int
+		pricePerWeek: Int
+		pricePerMonth: Int
+		street: String
+		district: String
+		state: String
+		photos: [String!]
+	): Listing!
+
+	deleteListing(listingId: Int!): Int
+
+	createConvo(firstId: Int!, secondId: Int!): Convo!
+	updateConvo(convoId: Int!, userId: Int!): Boolean!
+}

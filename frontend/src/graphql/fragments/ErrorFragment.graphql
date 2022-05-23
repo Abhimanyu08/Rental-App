@@ -1,0 +1,5 @@
+fragment ErrorFragment on Error {
+	__typename
+	type
+	message
+}

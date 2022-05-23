@@ -1,0 +1,31 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* body {
+	display: flex;
+	flex-direction: column;
+	height: 100vh;
+	width: 100vw;
+	overflow: hidden;
+} */
+/* text-black sm:h-3 sm:w-3 md:h-6 md:w-6 */
+p,
+label,
+input,
+textarea {
+	color: black;
+}
+
+/* border-2 border-indigo-500 */
+input,
+textarea {
+	border-width: 2px;
+	border-color: rgb(99 102 241);
+	padding-left: 0.5rem; /* 8px */
+}
+/* border-none bg-indigo-500 shadow-lg shadow-indigo-500/50 */
+/* .btn {
+	color: black;
+	background-color: rgb(129 140 248);
+} */

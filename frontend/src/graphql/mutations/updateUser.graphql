@@ -1,0 +1,9 @@
+mutation UpdateUser($updateUserId: Int!, $name: String, $avatarUrl: String) {
+	updateUser(id: $updateUserId, name: $name, avatar_url: $avatarUrl) {
+		id
+		name
+		email
+		avatar_url
+		auth_method
+	}
+}
